@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.com/joergrieger/RYieldCurve.svg?branch=master)](https://travis-ci.com/joergrieger/RYieldCurve)
+[![codecov](https://codecov.io/gh/joergrieger/bvars/branch/master/graph/badge.svg)](https://codecov.io/gh/joergrieger/bvars)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/bvars)]() 
 # RYieldCurve
 
 ## Overview
