@@ -1,0 +1,5 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^news\.md$
+^readme\.md$
+^_pkgdown\.yml$

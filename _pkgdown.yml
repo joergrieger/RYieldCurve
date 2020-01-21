@@ -1,0 +1,9 @@
+navbar:
+  title: "RYieldCurve"
+  right:
+  icon: fa-github
+  href: https://github.com/joergrieger/RYieldCurve
+
+template:
+  params:
+    bootswatch: cosmo
