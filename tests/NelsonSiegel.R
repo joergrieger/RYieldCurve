@@ -22,8 +22,13 @@ Yield <- as.matrix(data.frame(
   SVENY29 = US_Yield_Curve[,29], SVENY30 = US_Yield_Curve[,30]
 ),ncol=30)
 
-maturity <- seq(1:30)
+maturity <- seq(1:30)*12
 
-# Estimate Dynamic Nelson-Siegel Model
+# Estimate Dynamic Nelson-Siegel Model and find optimal decay factors using grid search
 
-EstimYieldCurve(yields = Yield,exogen=NULL,maturity = maturity)
+test <- EstimYieldCurve(yields = Yield,exogen=NULL,maturity = maturity,method="DNS")
+
+# Estimate Dynamic Söderlind-Svensson Model using user-supplied decay factors
+
+test2 <- EstimYieldCurve(yields = Yield, exogen = NULL, maturity = maturity, method = "DSS", lambda = c(0.022, 0.5))
+

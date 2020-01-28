@@ -45,7 +45,7 @@ TermPremium <- function(objVar, objModel){
 
   # Return results
   retlist <- structure(list(risk_free = risk_free,
-                            termm_premium = term_premium),
+                            term_premium = term_premium),
                        class = "premium")
   return(retlist)
 }

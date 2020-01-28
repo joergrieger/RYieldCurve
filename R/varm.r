@@ -29,8 +29,9 @@ varm <- function(y,exo=NULL){
   }
 
   # Estimate the parameters
-
-  beta <- solve( t(xt[1:(nObs-1),]) %*% xt[1:(nObs-1),] ) %*% t(xt[1:(nObs-1),]) %*% xt[2:(nObs),]
+  x1 <- xt[1:(nObs-1),]
+  y1 <- xt[2:nObs,]
+  beta <- pracma::mldivide(x1,y1)
 
   # return everything
 

@@ -3,3 +3,5 @@
 export(EstimYieldCurve)
 export(TermPremium)
 export(estimDNS)
+export(estimDSS)
+importFrom(pracma,mldivide)

@@ -36,7 +36,8 @@ estimDNS <- function(yields,maturity,lambda,frequency = 12){
     nfactors = 3,
     rho = matrix(c(1,1,0),ncol=1),
     maturity = maturity,
-    frequency = frequency
+    frequency = frequency,
+    lambda = lambda
   )
 
 
@@ -63,7 +64,7 @@ dns_helper <- function(maturity,lambda){
 find_lambda <- function(yields,maturity){
   SSE <- array(NA,dim=c(1000))
   lambdaGrid <- seq(1:300)/1000
-  for(ii in 1:1000){
+  for(ii in 1:300){
     restemp <- estimDNS(yields,maturity,lambdaGrid[ii])
     SSE[ii] <- restemp$SSE
   }
