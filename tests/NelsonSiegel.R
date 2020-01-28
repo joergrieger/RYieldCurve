@@ -30,5 +30,5 @@ test <- EstimYieldCurve(yields = Yield,exogen=NULL,maturity = maturity,method="D
 
 # Estimate Dynamic Söderlind-Svensson Model using user-supplied decay factors
 
-test2 <- EstimYieldCurve(yields = Yield, exogen = NULL, maturity = maturity, method = "DSS", lambda = c(0.022, 0.5))
+test2 <- EstimYieldCurve(yields = Yield, exogen = NULL, maturity = maturity, method = "DSS", lambda = c(0.1, 0.5))
 

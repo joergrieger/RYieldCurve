@@ -34,7 +34,7 @@ EstimYieldCurve <- function(yields,exogen = NULL,maturity, frequency = 12, metho
     }
     else{
 
-      stop("For the Dynamic Söderlind-Svensson Model please supply two values or NULL for the decay factor lambda.")
+      stop("For the Dynamic Soederlind-Svensson Model please supply two values or NULL for the decay factor lambda.")
 
     }
 

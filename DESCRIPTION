@@ -7,6 +7,7 @@ Maintainer: Joerg Rieger <joerg.rieger.jr@gmail.com>
 Description: Package to Estimate Yield Curve Models. Users have the choice between several yield curve models, such as the 
     Dynamic Nelson-Siegel or the Dynamic Svensson-Söderlind Model. The package automatically computes term premia and expected interest rates.
 Imports:
+    pracma,
     expm
 License: GPL-3
 Encoding: UTF-8

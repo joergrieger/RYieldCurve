@@ -5,7 +5,7 @@
 \title{Estimate Yield Curve Models}
 \usage{
 EstimYieldCurve(yields, exogen = NULL, maturity, frequency = 12,
-  method = "DNS")
+  method = "DNS", lambda = NULL)
 }
 \arguments{
 \item{yields}{A Txn panel of yields. Has to be a ts-objects}
@@ -16,8 +16,10 @@ EstimYieldCurve(yields, exogen = NULL, maturity, frequency = 12,
 
 \item{frequency}{data frequency (12=monthly, 52 = weekly, 360 = daily)}
 
-\item{method}{The method which is used to extract the factors. (DNS = Dynamic Nelson Siegel)}
+\item{method}{The method which is used to extract the factors. (DNS = Dynamic Nelson-Siegel, DSS = Dynamic Söderlind-Svensson Model)}
+
+\item{lambda}{Decay factor(s). If decay factors are not provided by the user the code will automatically search for the optimal decay factors.}
 }
 \description{
-This function estimates yield curve models and computes term premia. Users have the choice between several yield curve models such as the Dynamic-Nelson-Siegel model introduced by (), the Dynamic Svensson-Söderlind model or Joslin-Singleton-Zhu-model. For the DNS and DSS model the parameter lambda is automatically computed using a grid search.
+This function estimates yield curve models and computes term premia. Users have the choice between several yield curve models such as the Dynamic-Nelson-Siegel model introduced by (), the Dynamic Svensson-Söderlind model or Joslin-Singleton-Zhu-model. For the DNS and DSS model the decay factors is computed using a grid search over the range [0.001,0.300]. The program choses the decay factors that minimizes the sum of squared errors between model yields and yields supplied by the user. Alternatively the user can provide decay factor(s).
 }
