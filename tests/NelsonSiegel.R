@@ -24,11 +24,17 @@ Yield <- as.matrix(data.frame(
 
 maturity <- seq(1:30)*12
 
+# Split data set into "training" and "test" set
+nobs <- nrow(Yield)
+Yield_training <- Yield[1:(nobs-12),]
+Yield_test <- Yield[(nobs-11):nobs,]
+
 # Estimate Dynamic Nelson-Siegel Model and find optimal decay factors using grid search
 
-test <- EstimYieldCurve(yields = Yield,exogen=NULL,maturity = maturity,method="DNS")
+test <- EstimYieldCurve(yields = Yield_training,exogen=NULL,maturity = maturity,method="DNS")
+fc_test1 <- forecast(test,nhor=12,ylddata=Yield_test,maturity = maturity)
 
 # Estimate Dynamic Söderlind-Svensson Model using user-supplied decay factors
 
-test2 <- EstimYieldCurve(yields = Yield, exogen = NULL, maturity = maturity, method = "DSS", lambda = c(0.1, 0.5))
-
+test2 <- EstimYieldCurve(yields = Yield_training, exogen = NULL, maturity = maturity, method = "DSS", lambda = c(0.25, 0.6))
+fc_test2 <- forecast(test2,nhor=12,ylddata=Yield_test,maturity = maturity)

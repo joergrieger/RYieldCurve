@@ -74,3 +74,19 @@ find_lambda <- function(yields,maturity){
 
 }
 
+#' map factors into yields for a given set of maturities
+#' @param factors factors
+#' @param maturities maturities
+#' @param lambda decay factor
+
+
+map_yields_dns <- function(factors,maturity,lambda){
+
+  tmp <- dns_helper(maturity,lambda)
+  x1  <- cbind(tmp$b1,tmp$b2,tmp$b3)
+  ylds <- x1 %*% factors
+
+  return(ylds)
+
+}
+

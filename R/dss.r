@@ -74,3 +74,19 @@ find_dss_lambda <- function(maturity,yields){
   lambda2 = lambdagrid[lmin[2]]
   return(list(lambda1=lambda1,lambda2=lambda2))
 }
+
+#' map factors into ylds for Söderlind-Svensson
+#' @param factors factors
+#' @param maturity maturities
+#' @param lambda1,lambda2 decay factors
+
+map_yields_dss <- function(factors,maturity,lambda1,lambda2){
+
+  tmp <- dss_helper(maturity,lambda1,lambda2)
+  x1  <- cbind(tmp$b1,tmp$b2,tmp$b3,tmp$b4)
+
+  ylds <- x1 %*% factors
+
+  return(ylds)
+
+}

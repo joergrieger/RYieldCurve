@@ -10,7 +10,8 @@ RYieldCurve is a package to model yield curves, compute term premia and risk-fre
 
 Models include
 
-* Dynamic Nelson-Siegel Models
+* Dynamic Nelson-Siegel Model
+* Dynamic Söderlind-Svensson Model
     
 ## Installation
 
