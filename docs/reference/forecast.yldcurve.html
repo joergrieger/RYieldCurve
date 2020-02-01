@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Estimate Yield Curve Models — EstimYieldCurve • RYieldCurve</title>
+<title>Forecasting yield curves — forecast.yldcurve • RYieldCurve</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Estimate Yield Curve Models — EstimYieldCurve" />
+<meta property="og:title" content="Forecasting yield curves — forecast.yldcurve" />
 
-<meta property="og:description" content="This function estimates yield curve models and computes term premia. Users have the choice between several yield curve models such as the Dynamic-Nelson-Siegel model introduced by (), the Dynamic Svensson-Söderlind model or Joslin-Singleton-Zhu-model. For the DNS and DSS model the decay factors is computed using a grid search over the range [0.001,0.300]. The program choses the decay factors that minimizes the sum of squared errors between model yields and yields supplied by the user. Alternatively the user can provide decay factor(s)." />
+<meta property="og:description" content="Forecasting yield curves" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -94,46 +94,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Estimate Yield Curve Models</h1>
+    <h1>Forecasting yield curves</h1>
     
-    <div class="hidden name"><code>EstimYieldCurve.Rd</code></div>
+    <div class="hidden name"><code>forecast.yldcurve.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function estimates yield curve models and computes term premia. Users have the choice between several yield curve models such as the Dynamic-Nelson-Siegel model introduced by (), the Dynamic Svensson-Söderlind model or Joslin-Singleton-Zhu-model. For the DNS and DSS model the decay factors is computed using a grid search over the range [0.001,0.300]. The program choses the decay factors that minimizes the sum of squared errors between model yields and yields supplied by the user. Alternatively the user can provide decay factor(s).</p>
+    <p>Forecasting yield curves</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>EstimYieldCurve</span>(<span class='no'>yields</span>, <span class='kw'>exogen</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>maturity</span>, <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='fl'>12</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"DNS"</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for yldcurve</span>
+<span class='fu'><a href='forecast.html'>forecast</a></span>(<span class='no'>estimObj</span>, <span class='kw'>nhor</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>ylddata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>maturity</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>yields</th>
-      <td><p>A Txn panel of yields. Has to be a ts-objects</p></td>
+      <th>estimObj</th>
+      <td><p>yield curve model estimated by EstimYieldCurve</p></td>
     </tr>
     <tr>
-      <th>exogen</th>
-      <td><p>Exogeneous Variables for the VAR-Model</p></td>
+      <th>nhor</th>
+      <td><p>forecast horizon</p></td>
+    </tr>
+    <tr>
+      <th>ylddata</th>
+      <td><p>additional data to compute forecast errors. If NULL, no forecast errors are computed. If not NULL the user has to provide the maturity of the yields. Users should provide ylddata for the full forecast horizon.</p></td>
     </tr>
     <tr>
       <th>maturity</th>
-      <td><p>An nx1-vector of maturities.</p></td>
-    </tr>
-    <tr>
-      <th>frequency</th>
-      <td><p>data frequency (12=monthly, 52 = weekly, 360 = daily)</p></td>
-    </tr>
-    <tr>
-      <th>method</th>
-      <td><p>The method which is used to extract the factors. (DNS = Dynamic Nelson-Siegel, DSS = Dynamic Söderlind-Svensson Model)</p></td>
-    </tr>
-    <tr>
-      <th>lambda</th>
-      <td><p>Decay factor(s). If decay factors are not provided by the user the code will automatically search for the optimal decay factors.</p></td>
+      <td><p>maturity for forecasted yields. If not provided maturity data from model will be used. Not optional if ylddata is not NULL.</p></td>
     </tr>
     </table>
     
