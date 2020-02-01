@@ -50,7 +50,7 @@ EstimYieldCurve <- function(yields,exogen = NULL,maturity, frequency = 12, metho
     if(is.null(lambda)){
 
       cat("Finding optimal lambda\n")
-      lambda <- find_lambda(yields,maturity)
+      lambda <- find_lambda(yields = yields, maturity = maturity, frequency = frequency)
 
     }
 
@@ -80,7 +80,7 @@ EstimYieldCurve <- function(yields,exogen = NULL,maturity, frequency = 12, metho
     if(is.null(lambda)){
 
       cat("Finding optimal decay factors\n")
-      lambda <- find_dss_lambda(yields=yields,maturity=maturity)
+      lambda <- find_dss_lambda(yields = yields,maturity = maturity, frequency = frequency)
       lambda1 = lambda$lambda1
       lambda2 = lambda$lambda2
 

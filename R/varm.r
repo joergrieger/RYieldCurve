@@ -1,8 +1,8 @@
-#' Estimate a VAR(1)-Model
-#' The function varm estimates the following VAR(1)-Model:
-#' Y_t = mp + beta * (Y_{t-1} - mp) +e_t
-#' @param y data
-#' @param exo exogeneous variables
+# Estimate a VAR(1)-Model
+# The function varm estimates the following VAR(1)-Model:
+# Y_t = mp + beta * (Y_{t-1} - mp) +e_t
+# @param y data
+# @param exo exogeneous variables
 
 varm <- function(y,exo=NULL){
 

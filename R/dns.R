@@ -1,9 +1,8 @@
-#' Estimate Dynamic Nelson-Siegel Model
-#' @param yields ts-object with yields
-#' @param maturity vector with maturities in years
-#' @param lambda parameter in Nelson-Siegel
-#' @param frequency frequency of the data (12 = monthly, 52 = weekly, 360 = daily)
-#' @export
+# Estimate Dynamic Nelson-Siegel Model
+# @param yields ts-object with yields
+# @param maturity vector with maturities in years
+# @param lambda parameter in Nelson-Siegel
+# @param frequency frequency of the data (12 = monthly, 52 = weekly, 360 = daily)
 
 estimDNS <- function(yields,maturity,lambda,frequency = 12){
 
@@ -44,9 +43,9 @@ estimDNS <- function(yields,maturity,lambda,frequency = 12){
  return(retlist)
 }
 
-#' helper function for Dynamic Nelson-Siegel Model
-#' @param maturity vector with maturities in months
-#' @param lambda the lambda
+# helper function for Dynamic Nelson-Siegel Model
+# @param maturity vector with maturities in months
+# @param lambda the lambda
 
 dns_helper <- function(maturity,lambda){
 
@@ -57,27 +56,31 @@ dns_helper <- function(maturity,lambda){
 
 }
 
-#' Find lambda that minimizes the sum of squared errors using a grid search
-#' @param yields txn-panel with yields
-#' @param maturity vector with maturities in months
+# Find lambda that minimizes the sum of squared errors using a grid search
+# @param yields txn-panel with yields
+# @param maturity vector with maturities in months
 
-find_lambda <- function(yields,maturity){
-  SSE <- array(NA,dim=c(1000))
-  lambdaGrid <- seq(1:300)/1000
-  for(ii in 1:300){
-    restemp <- estimDNS(yields,maturity,lambdaGrid[ii])
-    SSE[ii] <- restemp$SSE
-  }
-  indx <- which.min(SSE)
-  minlambda <- lambdaGrid[indx]
-  return(minlambda)
+find_lambda <- function(yields,maturity,frequency = 12){
+
+  tmp <- optimx::optimx(par = 0.05, fn = dns_sse, gr = NULL, hess = NULL, lower = 0.0001, upper = 0.9,
+                        method = c("L-BFGS-B"),itnmax = NULL, control = list(),
+                        yields = yields, maturity = maturity, frequency = frequency)
+
+  return(tmp$p1)
 
 }
 
-#' map factors into yields for a given set of maturities
-#' @param factors factors
-#' @param maturities maturities
-#' @param lambda decay factor
+dns_sse <- function(x,yields,maturity,frequency){
+
+  tmp <- estimDNS(yields = yields, maturity = maturity, lambda = x, frequency = frequency)
+  return(tmp$SSE)
+
+}
+
+# map factors into yields for a given set of maturities
+# @param factors factors
+# @param maturities maturities
+# @param lambda decay factor
 
 
 map_yields_dns <- function(factors,maturity,lambda){

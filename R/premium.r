@@ -1,8 +1,8 @@
-#' Calculate Term Premia
-#' @param objVar estimate varm-model
-#' @param objModel estimated Model
-#' @export
-#'
+# Calculate Term Premia
+# @param objVar estimate varm-model
+# @param objModel estimated Model
+# @export
+#
 TermPremium <- function(objVar, objModel){
 
   # Declare Variables
@@ -50,14 +50,14 @@ TermPremium <- function(objVar, objModel){
   return(retlist)
 }
 
-#' Function to calculate the risk-free rate (Expectations component)
-#' @param V eigenvectors of VAR-coefficient
-#' @param D eigenvalues of VAR-coefficient
-#' @param n maturity in months
-#' @param X current yield factors
-#' @param mp mean value of factors
-#' @param rho helper
-#' @param I identity matrix
+# Function to calculate the risk-free rate (Expectations component)
+# @param V eigenvectors of VAR-coefficient
+# @param D eigenvalues of VAR-coefficient
+# @param n maturity in months
+# @param X current yield factors
+# @param mp mean value of factors
+# @param rho helper
+# @param I identity matrix
 Expr <- function(V,D,n,X,mp,rho,I){
 
   # Declare used functions

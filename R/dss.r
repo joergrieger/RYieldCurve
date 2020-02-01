@@ -1,10 +1,9 @@
-#' Dynamic Svensson-Söderlind Model
-#' @param yields Txn series of yields
-#' @param maturity vector of length n of maturity dates
-#' @param lambda1,lambda2 decay parameters
-#' @param frequency frequency of the data
-#' @export
-#' @importFrom pracma mldivide
+# Dynamic Svensson-Söderlind Model
+# @param yields Txn series of yields
+# @param maturity vector of length n of maturity dates
+# @param lambda1,lambda2 decay parameters
+# @param frequency frequency of the data
+# @importFrom pracma mldivide
 estimDSS <- function(yields,maturity,lambda1,lambda2,frequency=12){
 
   x        <- dss_helper(maturity,lambda1,lambda2)
@@ -55,30 +54,28 @@ dss_helper <- function(maturity,lambda1,lambda2){
 
 }
 
-find_dss_lambda <- function(maturity,yields){
+find_dss_lambda <- function(maturity,yields,frequency = 12){
 
-  sse <- array(NA,dim=c(300,300))
-  lambdagrid <- seq(1:300)/1000
+  tmp <- optimx::optimx(par = c(0.25,0.6), fn = dss_sse, gr = NULL, hess = NULL,
+                        lower = c(0.0001,0.0001), upper = c(0.9,0.9),
+                        method = c("L-BFGS-B"),itnmax = NULL, control = list(),
+                        yields = yields, maturity = maturity, frequency = frequency)
 
-  for(ii in 1:300){
-    for(jj in 1:300){
+  return(list(lambda1 = tmp$p1, lambda2 = tmp$p2))
 
-      restemp <- estimDSS(yields = yields, maturity = maturity,lambda1 = lambdagrid[ii], lambda2=lambdagrid[jj])
-      sse[ii,jj] <- restemp$SSE
-
-    }
-  }
-
-  lmin <- which(sse == min(sse),arr.ind=TRUE)
-  lambda1 = lambdagrid[lmin[1]]
-  lambda2 = lambdagrid[lmin[2]]
-  return(list(lambda1=lambda1,lambda2=lambda2))
 }
 
-#' map factors into ylds for Söderlind-Svensson
-#' @param factors factors
-#' @param maturity maturities
-#' @param lambda1,lambda2 decay factors
+dss_sse <- function(x,yields,maturity,frequency){
+
+  tmp <- estimDSS(yields = yields, maturity = maturity, lambda1 = x[1], lambda2 = x[2], frequency = frequency)
+  return(tmp$SSE)
+
+}
+
+# map factors into ylds for Söderlind-Svensson
+# @param factors factors
+# @param maturity maturities
+# @param lambda1,lambda2 decay factors
 
 map_yields_dss <- function(factors,maturity,lambda1,lambda2){
 

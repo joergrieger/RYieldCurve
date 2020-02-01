@@ -2,8 +2,4 @@
 
 S3method(forecast,yldcurve)
 export(EstimYieldCurve)
-export(TermPremium)
-export(estimDNS)
-export(estimDSS)
 export(forecast)
-importFrom(pracma,mldivide)
