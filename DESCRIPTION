@@ -11,7 +11,10 @@ Imports:
     expm,
     optimx,
     Rdpack,
-    ggplot2
+    ggplot2,
+    xts,
+    reshape2,
+    zoo
 RdMacros: Rdpack
 License: GPL-3
 Encoding: UTF-8

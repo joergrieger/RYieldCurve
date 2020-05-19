@@ -32,9 +32,12 @@ Yield_test <- Yield[(nobs-11):nobs,]
 # Estimate Dynamic Nelson-Siegel Model and find optimal decay factors using grid search
 
 test <- estimate_yield_model(yields = Yield_training,exogen=NULL,maturity = maturity,method="DNS")
+plot_errors(test)
 fc_test1 <- forecast(test,nhor=12,ylddata=Yield_test,maturity = maturity)
+
 
 # Estimate Dynamic Söderlind-Svensson Model using user-supplied decay factors
 
 test2 <- estimate_yield_model(yields = Yield_training, exogen = NULL, maturity = maturity, method = "DSS", lambda = c(0.25, 0.6))
+plot_errors(test2)
 fc_test2 <- forecast(test2,nhor=12,ylddata=Yield_test,maturity = maturity)

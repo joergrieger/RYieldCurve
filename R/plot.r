@@ -14,8 +14,6 @@ plot_factors.yldcurve <- function(estimObj,...){
   if(estimObj$yldmodel == "DNS"){nfactors = 3}
   if(estimObj$yldmodel == "DSS"){nfactors = 4}
 
-  nlength <- dim(factor_series)[1]
-  nseq <- 1:nlength
 
   pltlist <- list()
   if(estimObj$yldmodel == "DNS"){
@@ -30,7 +28,7 @@ plot_factors.yldcurve <- function(estimObj,...){
   }
 
   for(ii in 1:nfactors){
-    dffactors <- data.frame(factors = factor_series[,ii], stime = nseq)
+    dffactors <- data.frame(factors = factor_series[,ii], stime = estimObj$dates)
     p1 <- ggplot2::ggplot(data=dffactors) + ggplot2::geom_line(mapping = ggplot2::aes_(x=~stime,y=~factors))
     p1 <- p1 + ggplot2::ylab(factornames[ii])
     if(ii == 1){
@@ -87,8 +85,7 @@ plot_fitted.yldcurve <- function(estimObj,maturities,...){
 
   # define variables
   yldfit <- estimObj$model$yldfit
-  nlength <- dim(yldfit)[1]
-  nseq <- 1:nlength
+  dates  <- estimObj$dates
 
   pltlist <- list()
 
@@ -121,7 +118,7 @@ plot_fitted.yldcurve <- function(estimObj,maturities,...){
   for(ii in maturities){
     ij <- ij + 1
 
-    dftemp <- data.frame(yield = yldfit[,ii],stime=nseq)
+    dftemp <- data.frame(yield = yldfit[,ii],stime=dates)
     # Baseline plot
     p1 <- ggplot2::ggplot(data=dftemp) + ggplot2::geom_line(mapping = ggplot2::aes_(x=~stime,y=~yield))
     # Y-Axis
@@ -143,4 +140,32 @@ plot_fitted.yldcurve <- function(estimObj,maturities,...){
   }
 
   do.call("grid.arrange",c(pltlist,nrow=length(maturities)))
+}
+
+
+#' @title plot fit errors of fitted model
+#' @param estimObj an estimated yield curve model
+#' @param ... not used
+#' @rdname plot_errors
+#' @export
+#'
+plot_errors <- function(estimObj,...) UseMethod("plot_errors")
+
+#' @rdname plot_errors
+#' @export
+
+plot_errors.yldcurve <- function(estimObj,...){
+
+  # get errors
+  errors <- estimObj$model$ylderror
+  dates  <- estimObj$dates
+
+  # put it into one data frame
+  errordf <- data.frame(Dates = dates,error=errors)
+  moltendf <- reshape2::melt(errordf,id.vars="Dates")
+  p1 <- ggplot2::ggplot(moltendf,mapping=ggplot2::aes_(x=~Dates,y=~value,colour=~variable))+ggplot2::geom_line()
+  p1 <- p1 + ggplot2::theme(legend.position="none")
+  return(p1)
+
+
 }

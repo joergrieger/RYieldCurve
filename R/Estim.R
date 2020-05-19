@@ -48,6 +48,26 @@ estimate_yield_model <- function(yields,exogen = NULL,maturity, frequency = 12, 
 
   }
 
+  # Check if data is time series (xts or ts)
+  yldts <- F
+  if(stats::is.ts(yields)){
+
+    ylddates <- zoo::as.yearmon(zoo::index(yields))
+    yldts <- T
+
+  }
+  else if(xts::is.xts(yields)){
+
+    ylddates <- zoo::index(yields)
+    yldts <- T
+
+  }
+  else{
+
+    ylddates <- 1:dim(yields)[1]
+
+  }
+
 
   # Estimate factors
   if(toupper(method) == "DNS"){
@@ -74,6 +94,7 @@ estimate_yield_model <- function(yields,exogen = NULL,maturity, frequency = 12, 
     TP <- TermPremium(objVar = model_var, objModel = estim_model)
 
     retlist <- structure(list(yldmodel = "DNS",
+                              dates = ylddates,
                               model = estim_model,
                               varmodel = model_var,
                               term_premia = TP),
@@ -113,6 +134,7 @@ estimate_yield_model <- function(yields,exogen = NULL,maturity, frequency = 12, 
     TP <- TermPremium(objVar = model_var, objModel = estim_model)
 
     retlist <- structure(list(yldmodel = "DSS",
+                              dates = ylddates,
                               model = estim_model,
                               varmodel = model_var,
                               term_premia = TP),
