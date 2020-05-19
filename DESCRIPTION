@@ -9,7 +9,10 @@ Description: Package to Estimate Yield Curve Models. Users have the choice betwe
 Imports:
     pracma,
     expm,
-    optimx
+    optimx,
+    Rdpack,
+    ggplot2
+RdMacros: Rdpack
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

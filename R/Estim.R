@@ -6,9 +6,17 @@
 #' @param frequency data frequency (12=monthly, 52 = weekly, 360 = daily)
 #' @param method The method which is used to extract the factors. (DNS = Dynamic Nelson-Siegel, DSS = Dynamic Söderlind-Svensson Model)
 #' @param lambda Decay factor(s). If decay factors are not provided by the user the code will automatically search for the optimal decay factors.
+#' @examples
+#' \dontrun{
+#' library(RYieldCurve)
+#' data(US_Yield_Curve)
+#'
+#' # estimate yield curve model using dynamic Nelson-Siegel model
+#' test <- estimate_yield_model(yields = Yield_training,exogen=NULL,maturity = maturity,method="DNS")
+#' }
 #' @export
 
-EstimYieldCurve <- function(yields,exogen = NULL,maturity, frequency = 12, method="DNS",lambda=NULL){
+estimate_yield_model <- function(yields,exogen = NULL,maturity, frequency = 12, method="DNS",lambda=NULL){
 
   # Check input
   if(toupper(method) == "DNS"){
