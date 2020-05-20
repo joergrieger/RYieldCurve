@@ -3,12 +3,15 @@
 \docType{data}
 \name{US_Yield_Curve}
 \alias{US_Yield_Curve}
-\title{US-Yield curves}
+\title{US Yield curves}
 \format{An object of class \code{xts} (inherits from \code{zoo}) with 372 rows and 30 columns.}
 \usage{
 US_Yield_Curve
 }
 \description{
-US-Yield curves
+US Yield curves
+}
+\references{
+\insertRef{gurkaynak2007us}{RYieldCurve}
 }
 \keyword{datasets}

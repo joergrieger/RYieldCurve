@@ -21,7 +21,7 @@ estimate_yield_model(yields, exogen = NULL, maturity, frequency = 12,
 \item{lambda}{Decay factor(s). If decay factors are not provided by the user the code will automatically search for the optimal decay factors.}
 }
 \description{
-This function estimates yield curve models and computes term premia. Users have the choice between several yield curve models such as the Dynamic-Nelson-Siegel model introduced by (), the Dynamic Svensson-Söderlind model or Joslin-Singleton-Zhu-model. For the DNS and DSS model the decay factors is computed using a grid search over the range [0.001,0.300]. The program choses the decay factors that minimizes the sum of squared errors between model yields and yields supplied by the user. Alternatively the user can provide decay factor(s).
+This function estimates yield curve models and computes term premia. Users have the choice between several yield curve models such as the Dynamic-Nelson-Siegel model (\insertCite{diebold2006forecasting}{RYieldCurve},\insertCite{nelson1987parsimonious}{RYieldCurve}), the dynamic version of the Svensson-Söderlind (\insertCite{soderlind1997new}{RYieldCurve}) model or Joslin-Singleton-Zhu-model. For the DNS and DSS model the decay factors is computed using a grid search over the range [0.001,0.300]. The program choses the decay factors that minimizes the sum of squared errors between model yields and yields supplied by the user. Alternatively the user can provide decay factor(s).
 }
 \examples{
 \dontrun{
@@ -29,6 +29,10 @@ library(RYieldCurve)
 data(US_Yield_Curve)
 
 # estimate yield curve model using dynamic Nelson-Siegel model
+maturity <- seq(1:30)*12
 test <- estimate_yield_model(yields = Yield_training,exogen=NULL,maturity = maturity,method="DNS")
 }
+}
+\references{
+\insertAllCited{}
 }

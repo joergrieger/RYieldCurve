@@ -21,7 +21,7 @@ estimDNS <- function(yields,maturity,lambda,frequency = 12){
     ylds_tmp    <- as.matrix(yields[ii,],ncol=1)
     beta[ii,]   <- solve( t(x1) %*% x1 ) %*% t(x1) %*% (ylds_tmp)
     yldfit[ii,] <- t(x1 %*% beta[ii,])
-    ylderror[ii,]    <- ylds_tmp - yldfit[ii,]
+    ylderror[ii,]    <-  yldfit[ii,] - ylds_tmp
     SSE <- SSE + sum(ylderror[ii,]^2)
 
   }

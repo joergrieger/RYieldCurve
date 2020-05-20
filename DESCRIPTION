@@ -4,8 +4,7 @@ Title: Estimate Yield Curve Models
 Version: 0.1.0
 Author: Joerg Rieger
 Maintainer: Joerg Rieger <joerg.rieger.jr@gmail.com>
-Description: Package to Estimate Yield Curve Models. Users have the choice between several yield curve models, such as the 
-    Dynamic Nelson-Siegel or the Dynamic Svensson-Söderlind Model. The package automatically computes term premia and expected interest rates.
+Description: Package to Estimate Yield Curve Models. Users have the choice between several yield curve models, such as the Dynamic Nelson-Siegel or the Dynamic Svensson-Söderlind Model. The package automatically computes term premia and expected interest rates and has functions for plotting.
 Imports:
     pracma,
     expm,
@@ -14,7 +13,8 @@ Imports:
     ggplot2,
     xts,
     reshape2,
-    zoo
+    zoo,
+    gridExtra
 RdMacros: Rdpack
 License: GPL-3
 Encoding: UTF-8

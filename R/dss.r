@@ -22,7 +22,7 @@ estimDSS <- function(yields,maturity,lambda1,lambda2,frequency=12){
     #beta[ii,]   <- solve( t(x1) %*% x1 ) %*% t(x1) %*% (ylds_tmp)
     beta[ii,] <- pracma::mldivide(x1,ylds_tmp)
     yldfit[ii,] <- t(x1 %*% beta[ii,])
-    ylderror[ii,]    <- ylds_tmp - yldfit[ii,]
+    ylderror[ii,]    <-  yldfit[ii,] - ylds_tmp
     SSE <- SSE + sum(ylderror[ii,]^2)
 
   }

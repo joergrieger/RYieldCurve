@@ -3,11 +3,14 @@
 \name{plot_errors}
 \alias{plot_errors}
 \alias{plot_errors.yldcurve}
-\title{plot fit errors of fitted model}
+\alias{plot_errors.fcylds}
+\title{plot errors of fitted model or forecast errors}
 \usage{
 plot_errors(estimObj, ...)
 
 \method{plot_errors}{yldcurve}(estimObj, ...)
+
+\method{plot_errors}{fcylds}(estimObj, ...)
 }
 \arguments{
 \item{estimObj}{an estimated yield curve model}
@@ -15,5 +18,5 @@ plot_errors(estimObj, ...)
 \item{...}{not used}
 }
 \description{
-plot fit errors of fitted model
+plot errors of fitted model or forecast errors
 }

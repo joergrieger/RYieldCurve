@@ -38,6 +38,6 @@ fc_test1 <- forecast(test,nhor=12,ylddata=Yield_test,maturity = maturity)
 
 # Estimate Dynamic Söderlind-Svensson Model using user-supplied decay factors
 
-test2 <- estimate_yield_model(yields = Yield_training, exogen = NULL, maturity = maturity, method = "DSS", lambda = c(0.25, 0.6))
+test2 <- estimate_yield_model(yields = US_Yield_Curve, exogen = NULL, maturity = maturity, method = "DSS", lambda = c(0.25, 0.6))
 plot_errors(test2)
 fc_test2 <- forecast(test2,nhor=12,ylddata=Yield_test,maturity = maturity)

@@ -81,6 +81,7 @@ forecast.yldcurve <- function(estimObj,nhor=12,ylddata = NULL,maturity = NULL){
   # Declare matrix for forecasted factor data
   fc_factors <- array(NA,dim=c(nhor,nfactors))
   fc_ylds    <- array(NA,dim=c(nhor,matcols))
+  fc_errors  <- array(NA,dim=c(nhor,matcols))
   msfe       <- array(NA,dim=c(nhor,1))
 
   # predict factor movement
@@ -114,14 +115,19 @@ forecast.yldcurve <- function(estimObj,nhor=12,ylddata = NULL,maturity = NULL){
   # Calculate Forecast Errors
   for(ii in 1:nhor){
 
-    fc_error <- (fc_ylds[ii,] - ylddata[ii,])^2
-    msfe[ii,] <- sum(fc_error)
+    fc_errors[ii,] <- (fc_ylds[ii,] - ylddata[ii,])
+    msfe[ii,] <- sum(fc_errors[ii,]^2)
 
   }
 
   retlist <- list(fc_factors = fc_factors,
                   fc_yields = fc_ylds,
-                  MSFE = msfe)
+                  fc_errors = fc_errors,
+                  fc_obs = ylddata,
+                  MSFE = msfe,
+                  fc_horizon = nhor,
+                  yldobj=estimObj)
+  retlist <- structure(retlist,class="fcylds")
 
   return(retlist)
 

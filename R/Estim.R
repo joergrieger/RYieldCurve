@@ -1,5 +1,5 @@
 #' Estimate Yield Curve Models
-#' @description This function estimates yield curve models and computes term premia. Users have the choice between several yield curve models such as the Dynamic-Nelson-Siegel model introduced by (), the Dynamic Svensson-Söderlind model or Joslin-Singleton-Zhu-model. For the DNS and DSS model the decay factors is computed using a grid search over the range [0.001,0.300]. The program choses the decay factors that minimizes the sum of squared errors between model yields and yields supplied by the user. Alternatively the user can provide decay factor(s).
+#' @description This function estimates yield curve models and computes term premia. Users have the choice between several yield curve models such as the Dynamic-Nelson-Siegel model (\insertCite{diebold2006forecasting}{RYieldCurve},\insertCite{nelson1987parsimonious}{RYieldCurve}), the dynamic version of the Svensson-Söderlind (\insertCite{soderlind1997new}{RYieldCurve}) model or Joslin-Singleton-Zhu-model. For the DNS and DSS model the decay factors is computed using a grid search over the range [0.001,0.300]. The program choses the decay factors that minimizes the sum of squared errors between model yields and yields supplied by the user. Alternatively the user can provide decay factor(s).
 #' @param yields A Txn panel of yields. Has to be a ts-objects
 #' @param exogen Exogeneous Variables for the VAR-Model
 #' @param maturity An nx1-vector of maturities.
@@ -12,8 +12,11 @@
 #' data(US_Yield_Curve)
 #'
 #' # estimate yield curve model using dynamic Nelson-Siegel model
+#' maturity <- seq(1:30)*12
 #' test <- estimate_yield_model(yields = Yield_training,exogen=NULL,maturity = maturity,method="DNS")
 #' }
+#' @references
+#' \insertAllCited{}
 #' @export
 
 estimate_yield_model <- function(yields,exogen = NULL,maturity, frequency = 12, method="DNS",lambda=NULL){
@@ -54,12 +57,14 @@ estimate_yield_model <- function(yields,exogen = NULL,maturity, frequency = 12, 
 
     ylddates <- zoo::as.yearmon(zoo::index(yields))
     yldts <- T
+    yields <- as.matrix(yields)
 
   }
   else if(xts::is.xts(yields)){
 
     ylddates <- zoo::index(yields)
     yldts <- T
+    yields <- as.matrix(yields)
 
   }
   else{

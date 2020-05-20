@@ -5,16 +5,16 @@
 \alias{plot_fitted.yldcurve}
 \title{plot fitted yield series}
 \usage{
-plot_fitted(estimObj, ...)
+plot_fitted(estimObj, maturities, ...)
 
 \method{plot_fitted}{yldcurve}(estimObj, maturities, ...)
 }
 \arguments{
 \item{estimObj}{an estimated yield curve model}
 
-\item{...}{not used}
-
 \item{maturities}{the maturities that should be plotted. The array refers to the columns of the maturities and the maximum number of maturities that can be plotted at the same time is 5. There will be a warning if the user wants to plot more than 5 series and the function uses only the first 5 elements in the array.}
+
+\item{...}{not used}
 }
 \description{
 plot fitted yield series
